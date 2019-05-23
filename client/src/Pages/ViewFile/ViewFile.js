@@ -1,25 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import Jumbotron from "../../components/Jumbotron";
-// import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
-// import { Col, Row, Container } from "../../components/Grid";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
+
 
 class ViewFile extends Component {
   // Setting our component's initial state
   state = {
-   file: {}
+   file: []
   };
 
   componentDidMount() {
     API.getFile(this.props.match.params.id)
       .then(res => { 
-        this.setState({ volunteer: res.data })
-        this.parseType()
+
+        console.log("response data:" + JSON.stringify(res.data, null, 2))
+        this.setState({ file: res.data })
+        this.consolelogs()
       })
       .catch(err => console.log(err));
+  }
+
+  consolelogs = () => {
+    console.log(this.state.file)
   }
 
  
@@ -27,7 +29,48 @@ class ViewFile extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        
+              
+              
+                <div className="row">
+                  <div className="col-md-2 col-sm-2">
+                      <Link className="btn btn-light" to="/content">Add URL</Link>
+                  </div>
+                  <div className="col-md-2 col-sm-2">
+                  <Link className="btn btn-light" to="/files">View Files</Link>
+                  </div>
+                </div>
+                
+               
+            
+
+            <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <div className="author-container">
+                <h1>Files</h1>
+                <table className="table table-striped">
+                  
+                  <tbody>
+                  {this.state.file.map(f => (
+                    <tr id="form-row">
+                     <td>
+                       <strong>{f.title}</strong>
+                     </td>
+                     <td>
+                     <a href={f.url}>{f.url}</a>
+                     </td>
+                     <td>
+                     {f.createdAt}
+                     </td>
+                    </tr>
+                   ))}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
            
     );
   }

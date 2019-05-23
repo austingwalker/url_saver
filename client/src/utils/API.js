@@ -9,8 +9,8 @@ export default {
     return axios.get("/api/files");
   },
 
-  getFile: function() {
-    return axios.get("/api/files/:id");
+  getFile: function(id) {
+    return axios.get("/api/url/" + id);
   },
 
   //Post functions

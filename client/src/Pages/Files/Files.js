@@ -99,7 +99,7 @@ class Files extends Component {
                       {file.Urls.length}
                      </td>
                      <td>
-                       View
+                     <Link className="btn btn-light" to={"/ViewFile/" + file.id}>View File</Link>
                      </td>
                      <td>
                        Add
