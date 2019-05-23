@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import Jumbotron from "../../components/Jumbotron";
-// import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
-// import { Col, Row, Container } from "../../components/Grid";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Home extends Component {
   // Setting our component's initial state
   state = {
     title: "",
     url: "",
-    fileName: ""
+    fileId: "",
+    files: []
   };
 
   componentDidMount(){
+    this.renderAllFiles()
     this.resetState()
   }
+
+  renderAllFiles = () => {
+    API.getFiles()
+    .then(res => {
+      console.log(res.data)
+      this.setState({ files: res.data})
+    })
+    .catch(err => console.log(err));   
+  }
+
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -32,17 +39,18 @@ class Home extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+   
+    let id = Number(this.state.fileId)
 
     console.log("Title: " + this.state.title)
     console.log("URL: " + this.state.url)
-    console.log("File: " + this.state.file)
+    console.log("File: " + id)
     
-    
-    if (this.state.title && this.state.url && this.state.file) {
+    if (this.state.title && this.state.url && this.state.fileId) {
       API.addURL({
         title: this.capitalize(this.state.title),
         url: this.state.url,
-        file: this.state.file,
+        FileId: id,
       })
         .then(res => {
           
@@ -52,11 +60,11 @@ class Home extends Component {
            
         })
         .catch(err => console.log(err));
+    
     }
   };
 
   resetState = () => {
-    console.log("reset called")
     this.setState({
       title: "",
       url: "",
@@ -71,11 +79,9 @@ class Home extends Component {
           <div className="row top-30">
             <div className="col-md-2 col-sm-2">
             <Link className="btn btn-light" to="/">Home</Link>
-              {/* <a className="btn btn-light" href="/blog">Go to Blog</a> */}
             </div>
             <div className="col-md-2 col-sm-2">
             <Link className="btn btn-light" to="/files">View Files</Link>
-              {/* <a className="btn btn-light" href="/authors">Manage Authors</a> */}
             </div>
           </div>
           <div className="row">
@@ -86,13 +92,14 @@ class Home extends Component {
                   <input placeholder="Title" type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleInputChange}/>
                   <br />
                   <label>URL:</label>
-                  <textarea placeholder="URL" className="form-control" rows="1" name="url" value={this.state.url} onChange={this.handleInputChange}></textarea>
+                  <input placeholder="URL" type="url" className="form-control" rows="1" name="url" value={this.state.url} onChange={this.handleInputChange}/>
                   <div className="form-group">
                     <label>Select File:</label>
-                    <select className="custom-select" name="file" value={this.state.file} onChange={this.handleInputChange}>
+                    <select className="custom-select" name="fileId" value={this.state.fileId} onChange={this.handleInputChange}>
                     <option>...</option>
-                    <option>a</option>
-                    <option>b</option>
+                    {this.state.files.map(file => (
+                    <option key={file.name} name="fildId" value={file.id}>{file.name}</option>
+                    ))}
                     </select>
                   </div>
                   <br />

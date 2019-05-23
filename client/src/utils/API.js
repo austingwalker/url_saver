@@ -4,10 +4,16 @@ import axios from "axios";
 // It accepts a "query" or term to search the recipe api for
 export default {
 
+  //Get functions
   getFiles: function() {
     return axios.get("/api/files");
   },
 
+  getFile: function() {
+    return axios.get("/api/files/:id");
+  },
+
+  //Post functions
   addURL: function(urlData) {
     return axios.post("/api/url", urlData);
   },
@@ -16,6 +22,10 @@ export default {
     console.log(fileData)
     return axios.post("/api/files", fileData);
   },
+
+  //Put functions
+
+  //Delete functions
 
 
 };

@@ -4,15 +4,20 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
+        notEmpty: true,
         len: [1]
       }
     },
     url: {
       type: DataTypes.TEXT,
       allowNull: false,
-      len: [1]
+      
     }
   });
+
+  // validate: {
+  //   isUrl: true
+  // }
 
   Url.associate = function(models) {
     // We're saying that a Post should belong to an Author

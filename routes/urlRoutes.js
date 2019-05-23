@@ -46,6 +46,7 @@ module.exports = function(app) {
 
   // POST route for saving a new post
   app.post("/api/url", function(req, res) {
+    console.log("URL req.body" + JSON.stringify(req.body, null, 2))
     db.Url.create(req.body).then(function(dbUrl) {
       res.json(dbUrl);
     });

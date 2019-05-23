@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import Jumbotron from "../../components/Jumbotron";
-// import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
-// import { Col, Row, Container } from "../../components/Grid";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Files extends Component {
   // Setting our component's initial state
@@ -16,16 +11,22 @@ class Files extends Component {
   };
 
   componentDidMount(){
-    // this.resetState()
+    this.renderAllFiles()
+    this.resetState()
   }
 
   renderAllFiles = () => {
     API.getFiles()
     .then(res => {
-      console.log(res)
+      
       this.setState({ files: res.data})
+      this.consoleLogs()
     })
     .catch(err => console.log(err));   
+  }
+
+  consoleLogs = () => {
+    console.log(this.state.files)
   }
 
   handleInputChange = event => {
@@ -42,19 +43,14 @@ class Files extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    console.log("File Name 1: " + this.state.fileName)
-    
-    
-    
     if (this.state.fileName) {
       API.addFile({
         name: this.capitalize(this.state.fileName)
       })
         .then(res => {
-          console.log("Returning: " + res)
           alert(`File ${this.capitalize(this.state.fileName)} was created.`)
-        console.log(`File added ${this.state.files}`)
           this.resetState()
+          this.renderAllFiles()
            
         })
         .catch(err => console.log(err));
@@ -62,7 +58,6 @@ class Files extends Component {
   };
 
   resetState = () => {
-    console.log("reset called")
     this.setState({
       fileName: ""
     });
@@ -75,11 +70,9 @@ class Files extends Component {
           <div className="row mt-4">
             <div className="col-md-2 col-sm-2">
             <Link className="btn btn-light" to="/">Home</Link>
-              {/* <a className="btn btn-light" href="/blog">Go to Blog</a> */}
             </div>
             <div className="col-md-2 col-sm-2">
             <Link className="btn btn-light" to="/content">Add URL</Link>
-              {/* <a className="btn btn-light" href="/cms">New Post</a> */}
             </div>
           </div>
           <div className="row">
@@ -97,12 +90,13 @@ class Files extends Component {
                     </tr>
                   </thead>
                   <tbody>
+                  {this.state.files.map(file => (
                     <tr id="form-row">
                      <td>
-                       File Name
+                       {file.name}
                      </td>
                      <td>
-                       0
+                      {file.Urls.length}
                      </td>
                      <td>
                        View
@@ -114,6 +108,7 @@ class Files extends Component {
                        Delete
                      </td>
                     </tr>
+                    ))}
                   </tbody>
                   </table>
                       <form id="author-form">

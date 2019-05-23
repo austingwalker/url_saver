@@ -26,15 +26,12 @@ module.exports = function(app) {
       res.json(dbFiles);
     });
   });
-
   
   app.post("/api/files", function(req, res) {
     db.Files.create(req.body).then(function(dbFiles) {
       res.json(dbFiles);
     });
   });
-  
-
   
   app.delete("/api/files/:id", function(req, res) {
     db.Files.destroy({
