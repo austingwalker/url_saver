@@ -42,16 +42,16 @@ class Files extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    console.log("File Name: " + this.state.fileName)
+    console.log("File Name 1: " + this.state.fileName)
     
     
     
     if (this.state.fileName) {
       API.addFile({
-        file: this.capitalize(this.state.fileName)
+        name: this.capitalize(this.state.fileName)
       })
         .then(res => {
-          
+          console.log("Returning: " + res)
           alert(`File ${this.capitalize(this.state.fileName)} was created.`)
         console.log(`File added ${this.state.files}`)
           this.resetState()

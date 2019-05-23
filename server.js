@@ -19,21 +19,33 @@ if (process.env.NODE_ENV === "production") {
 
 // const fileRoutes = require("./routes/api/fileRoutes");
 // const urlRoutes = require("./routes/api/urlRoutes");
+
+// const fileRoutes = require("./roots/fileRoutes.js");
 // // Use apiRoutes
 // app.use("/api/files", fileRoutes);
 // app.use("/api/url", urlRoutes);
 
-const Routes = require("./routes");
+// app.post("/api/files", function(req, res) {
+//   console.log("req.body:" + req.body) 
+//     db.Files.create(req.body).then(function(dbFiles) {
+//       res.json(dbFiles);
+//     });
+//   });
 
-app.use(Routes);
+// const Routes = require("./routes");
+
+// app.use(Routes);
 
 // require("./routes")(app)
 
+require("./routes/fileRoutes.js")(app)
+require("./routes/urlRoutes.js")(app)
+
 // Send every request to the React app
 // Define any API routes before this runs
-// app.get("*", function(req, res) {
-//   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-// });
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {

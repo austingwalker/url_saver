@@ -40,7 +40,7 @@ module.exports = function(app) {
   })
 
   .post(function(req, res) {
-    console.log("hit")
+    console.log(`hit req.bod ${req.body}`)
     db.Files.create(req.body).then(function(dbFiles) {
       res.json(dbFiles);
     });

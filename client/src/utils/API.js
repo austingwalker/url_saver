@@ -13,6 +13,7 @@ export default {
   },
 
   addFile: function(fileData) {
+    console.log(fileData)
     return axios.post("/api/files", fileData);
   },
 
