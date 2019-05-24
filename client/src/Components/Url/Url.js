@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
+import "./Url.css"
 
-class Home extends Component {
+class Url extends Component {
   // Setting our component's initial state
   state = {
     title: "",
@@ -14,6 +16,11 @@ class Home extends Component {
   componentDidMount(){
     this.renderAllFiles()
     this.resetState()
+    this.consoleLog()
+  } 
+
+  consoleLog = () => {
+    console.log(this.props.contentType)
   }
 
   renderAllFiles = () => {
@@ -45,23 +52,49 @@ class Home extends Component {
     console.log("Title: " + this.state.title)
     console.log("URL: " + this.state.url)
     console.log("File: " + id)
-    
-    if (this.state.title && this.state.url && this.state.fileId) {
-      API.addURL({
-        title: this.capitalize(this.state.title),
-        url: this.state.url,
-        FileId: id,
-      })
-        .then(res => {
-          
-          alert(`URL ${this.state.url} was added to your database!`)
-        
-          this.resetState()
-           
-        })
-        .catch(err => console.log(err));
-    
+
+    if (this.state.title.length >= 1){
+      if (this.state.url){
+        if (this.state.fileId){
+          API.addURL({
+            title: this.capitalize(this.state.title),
+            url: this.state.url,
+            FileId: id,
+          })
+            .then(res => {
+              
+              alert(`URL ${this.state.url} was added to your database!`)
+            
+              this.resetState()
+               
+            })
+            .catch(err => console.log(err));
+        } else {
+          alert("Please select a valid folder")
+        }
+      } else {
+        alert("Please add a valid URL")
+      }
+    } else {
+      alert("Please add a title!")
     }
+    
+    // if (this.state.title && this.state.url && this.state.fileId) {
+    //   API.addURL({
+    //     title: this.capitalize(this.state.title),
+    //     url: this.state.url,
+    //     FileId: id,
+    //   })
+    //     .then(res => {
+          
+    //       alert(`URL ${this.state.url} was added to your database!`)
+        
+    //       this.resetState()
+           
+    //     })
+    //     .catch(err => console.log(err));
+    
+    // }
   };
 
   resetState = () => {
@@ -75,24 +108,19 @@ class Home extends Component {
 
   render() {
     return (
-            <div className="container hidden">
-          <div className="row top-30">
-            <div className="col-md-2 col-sm-2">
-            <Link className="btn btn-light" to="/">Home</Link>
-            </div>
-            <div className="col-md-2 col-sm-2">
-            <Link className="btn btn-light" to="/files">View Files</Link>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 offset-md-3">
-              <form id="cms">
+        <div className="addUrlPage">
+          <Row >
+            <Col md="2">
+            </Col>
+            <Col className="addUrlBox" >
+            <div >
+              <form >
                 <div className="form-group">
                   <label>Title:</label>
                   <input placeholder="Title" type="text" className="form-control" name="title" value={this.state.title} onChange={this.handleInputChange}/>
                   <br />
                   <label>URL:</label>
-                  <input placeholder="URL" type="url" className="form-control" rows="1" name="url" value={this.state.url} onChange={this.handleInputChange}/>
+                  <input placeholder="URL" type="url" pattern="https://.*" required className="form-control" rows="1" name="url" value={this.state.url} onChange={this.handleInputChange} />
                   <div className="form-group">
                     <label>Select File:</label>
                     <select className="custom-select" name="fileId" value={this.state.fileId} onChange={this.handleInputChange}>
@@ -107,10 +135,15 @@ class Home extends Component {
                 </div>
               </form>
             </div>
-          </div>
+            </Col>
+            
+            <Col md="2">
+            </Col>
+          </Row>
         </div>
     );
   }
 }
 
-export default Home;
+export default Url;
+

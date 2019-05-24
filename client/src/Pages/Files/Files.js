@@ -20,14 +20,14 @@ class Files extends Component {
     .then(res => {
       
       this.setState({ files: res.data})
-      this.consoleLogs()
+      // this.consoleLogs()
     })
     .catch(err => console.log(err));   
   }
 
-  consoleLogs = () => {
-    console.log(this.state.files)
-  }
+  // consoleLogs = () => {
+  //   console.log(this.state.files)
+  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;

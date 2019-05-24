@@ -1,0 +1,108 @@
+.urlBox {
+            display: block;
+            float: left;
+            height: 32px;
+            width: 85%;
+            
+}
+
+.urlSubmit {
+            display: block;
+            float: right;
+            height: 40px;
+            width: 10%;
+            margin: -5px -2px -2px 0px;
+            
+}
+
+.containerBox {
+    padding: 0px;
+    margin-top: 100px;
+    
+}
+
+.btnBox {
+    border: 1px solid rgb(163, 162, 162);
+    /* border-radius: 25px; */
+    text-align: center;
+    padding: 50px;
+    background: white;
+}
+
+
+.contentBtn {
+    display: block;
+    float: left;
+    width: 30%;
+    height: 150px;
+    margin: 1%;
+    padding: 6%;
+}
+
+.contentBtn2 {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.contentBtn3 {
+    float: right;
+}
+
+
+.allFilesBtn {
+    float: right;
+}
+
+.comingSoon {
+    display: block;
+    float: right;
+    width: 30%;
+    margin: 1.25%;
+    margin-top: 0;
+}
+
+.comingSoonText {
+    margin-right: 2%;
+}
+
+@media screen and (max-width: 414px) {
+
+    .containerBox {
+        padding: 0px;
+        margin-top: 50px;
+        
+    }
+
+    .btnBox {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .title {
+        font-size: 15px;
+    }
+
+    .contentBtn {
+        display: block;
+        float: left;
+        width: 30%;
+        height: 100px;
+        margin: 1%;
+        padding: 6%;
+    }
+
+    .contentBtn2 {
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+
+    .contentBtn3 {
+        float: right;
+    }
+    
+
+    .comingSoon {
+       font-size: 12px;
+    }
+
+}

@@ -1,0 +1,18 @@
+.navbar {
+    background: white;
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    border-bottom: 1px solid rgb(163, 162, 162);
+}
+
+.navbar-brand {
+    color: black;
+    float:left;
+    
+}
+
+.allFilesBtn {
+    float: right;
+    color: black;
+}
+
