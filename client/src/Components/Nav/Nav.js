@@ -8,7 +8,7 @@ const Nav = () => (
     <a className="navbar-brand" href="/">
       URL_Saver
     </a>
-    <Link className="btn btn-link ml-auto allFilesBtn" to="/files">View All URL Files</Link>
+    
   </nav>
 );
 

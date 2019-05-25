@@ -73,6 +73,16 @@ class Files extends Component {
   render() {
     return (
         <Container>
+          <Row className="addAnotherRow">
+          <Col md="2">
+          </Col>
+          <Col>
+          <Link className="btn addAnotherURL" to="/url"><i className="fas fa-arrow-left leftArrow"></i> <h5 className="leftArrowWords"> Add Another URL</h5></Link>
+            {/* <button className="addAnotherURL" onClick={this.props.backToURL}><i class="fas fa-arrow-left"></i> Add Another URL</button> */}
+          </Col>
+          <Col md="2">
+          </Col>
+          </Row> 
           <Row>
             <Col md="2">
             </Col>

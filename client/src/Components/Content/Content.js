@@ -18,7 +18,7 @@ class Content extends Component {
 
   renderPage = () => {
     if (this.state.contentType === "url") {
-      return <Url />;
+      return <Url contentSubmitted={this.props.contentSubmitted}/>;
     } 
     
     // else if (this.state.currentPage === "About") {

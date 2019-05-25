@@ -1,14 +1,24 @@
-.navbar {
-    background: white;
-    /* background-repeat: no-repeat; */
-    background-position: center;
-    border-bottom: 1px solid rgb(163, 162, 162);
+.righArrow{
+    float: right;
+    margin-top: 7.5px;
+    margin-left: 5px;
 }
 
-.navbar-brand {
-    color: black;
-    float:left;
-    
+.righArrowWords{
+    float: right;
+    margin: 5px;
+}
+
+.allFilesArrow{
+    border: none;
+    background: none;
+    color: #18BC9C;
+    font-size: 20px;
+    cursor: pointer; 
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 13%;
+    float: right;
 }
 
 .allFilesBtn {
@@ -17,13 +27,15 @@
 }
 
 .addUrlPage {
-   margin-top: 50px;
+   margin-top: 20px;
 }
 
 .addUrlBox {
     padding: 30px;
     background: white;
-    border: 1px solid rgb(163, 162, 162);
+    margin-left: 10%;
+    margin-right: 10%;
+    /* border: 1px solid rgb(163, 162, 162); */
  }
 
 .selectFile {

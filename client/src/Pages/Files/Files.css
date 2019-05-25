@@ -1,3 +1,33 @@
+.addAnotherRow{
+    margin-top: 20px;
+}
+
+
+
+.leftArrow{
+    float: left;
+    margin-top: 7.5px;
+    margin-right: 5px;
+}
+
+.leftArrowWords{
+    float: left;
+    margin: 5px;
+}
+
+.addAnotherURL{
+    border: none;
+    background: none;
+    color: #18BC9C;
+    font-size: 20px;
+    cursor: pointer; 
+    padding-left: 0px;
+}
+.addAnotherURL:hover {
+    color: #18BC9C;
+    
+}
+
 .filesFormRow {
     text-align: center;
     margin-top: 20px;

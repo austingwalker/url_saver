@@ -74,6 +74,7 @@ class Url extends Component {
           } 
             
           this.resetState()
+          this.props.contentSubmitted() 
            
         })
         .catch(err => console.log(err));
@@ -94,6 +95,16 @@ class Url extends Component {
   render() {
     return (
         <div className="addUrlPage">
+        <Row>
+        <Col md="2">
+        </Col>
+        <Col>
+        <Link className="btn allFilesArrow" to="/files"><i class="fas fa-arrow-right righArrow"></i><h5 className="righArrowWords">View All URL Files</h5></Link>
+        {/* <button className="allFilesArrow" onClick={this.props.contentSubmitted}>View All URL Files <i class="fas fa-arrow-right"></i></button> */}
+        </Col>
+        <Col md="2">
+        </Col>
+        </Row>
           <Row >
             <Col md="2">
             </Col>
@@ -122,7 +133,7 @@ class Url extends Component {
                     </select>
                   </div>
                   <br />
-                  <button type="submit" className="btn btn-success submit" onClick={this.handleFormSubmit}>Submit</button>
+                  <button type="submit" className="btn btn-success submit" onClick={this.handleFormSubmit}  >Submit</button>
                 </div>
               </form>
             </div>

@@ -1,27 +1,33 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
+import "./ViewFile.css"
 
 
 class ViewFile extends Component {
   // Setting our component's initial state
   state = {
-   file: []
+   file: [],
+   fileName: ""
   };
 
   componentDidMount() {
     API.getFile(this.props.match.params.id)
       .then(res => { 
 
-        console.log("response data:" + JSON.stringify(res.data, null, 2))
-        this.setState({ file: res.data })
+        // console.log("response data:" + JSON.stringify(res.data, null, 2))
+        this.setState({ 
+          file: res.data,
+          fileName: res.data[0].File.name 
+        })
         this.consolelogs()
       })
       .catch(err => console.log(err));
   }
 
   consolelogs = () => {
-    console.log(this.state.file)
+    console.log(this.state.file[0].File.name)
   }
 
  
@@ -29,26 +35,23 @@ class ViewFile extends Component {
 
   render() {
     return (
-      <div>
-        
-              
-              
-                <div className="row">
-                  <div className="col-md-2 col-sm-2">
-                      <Link className="btn btn-light" to="/content">Add URL</Link>
-                  </div>
-                  <div className="col-md-2 col-sm-2">
-                  <Link className="btn btn-light" to="/files">View Files</Link>
-                  </div>
-                </div>
-                
-               
-            
-
-            <div className="row">
-            <div className="col-md-8 offset-md-2">
-              <div className="author-container">
-                <h1>Files</h1>
+      <Container>
+        <Row className="addAnotherRow">
+          <Col md="2">
+          </Col>
+          <Col>
+          <Link className="btn addAnotherURL" to="/files"><i className="fas fa-arrow-left leftArrow"></i> <h5 className="leftArrowWords"> Back to Files</h5></Link>
+            {/* <button className="addAnotherURL" onClick={this.props.backToURL}><i class="fas fa-arrow-left"></i> Add Another URL</button> */}
+          </Col>
+          <Col md="2">
+          </Col>
+          </Row> 
+          <Row >
+          <Col md="2">
+          </Col>
+          <Col>
+           <div className="fileContainter">
+                <h1>{this.state.fileName}</h1>
                 <table className="table table-striped">
                   
                   <tbody>
@@ -68,9 +71,23 @@ class ViewFile extends Component {
                   </tbody>
                 </table>
             </div>
-          </div>
-        </div>
-      </div>
+        
+          </Col>
+          <Col md="2">
+          </Col>
+          </Row> 
+        </Container>  
+              
+                  
+               
+                
+               
+            
+
+            
+            
+             
+        
            
     );
   }
