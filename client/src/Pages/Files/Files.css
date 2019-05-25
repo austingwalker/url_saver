@@ -7,14 +7,6 @@
     float: right;
 }
 
-/* .addFileInput {
-    width: 85%;
-    float: left;
-}
-
-.addFileBtn {
-    float: right;
-} */
 
 .tableHeader {
     float: left
@@ -28,6 +20,11 @@
     margin-top: 20px;
     padding: 30px;
     background: white;
+}
+
+.number {
+    margin-top: 7.5px;
+    margin-left: 17%;
 }
 
 .viewFileLink {
@@ -46,4 +43,13 @@
 
 .deleteBtn {
     cursor: pointer;
+}
+
+@media screen and (max-width: 414px) {
+
+    .files-container {
+        margin-top: 20px;
+        padding: 10px;
+        background: white;
+    }
 }

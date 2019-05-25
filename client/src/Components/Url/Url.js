@@ -111,6 +111,7 @@ class Url extends Component {
                     <label className="selectFile">Select file or  </label>
                     <FileModal
                     renderAllFiles={this.renderAllFiles}
+                    num={1}
                     />
                     {/* <button type="submit" className="btn btn-link createFileBtn">Create File</button> */}
                     <select className="custom-select" name="fileId" value={this.state.fileId} onChange={this.handleInputChange}>

@@ -1,9 +1,9 @@
 import React from 'react';
-import "./FileModal.css";
+import "./DeleteModal.css";
 import { Button, Modal, ModalHeader, ModalBody, Row,ModalFooter } from 'reactstrap';
 import API from "../../utils/API";
 
-class FileModal extends React.Component {
+class DeleteModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,19 +68,23 @@ class FileModal extends React.Component {
   render() {
     return (
       <div>
-        <Button className="btn-link createFileBtn" onClick={this.toggle}>Add New File</Button>
+        <Button className="btn-link deleteFileBtn" onClick={this.toggle}>Delete</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader className="fileModalHeader"  toggle={this.toggle}><strong>Create File</strong></ModalHeader>
+          <ModalHeader className="deleteModalHeader"  toggle={this.toggle}><strong>Are you sure?</strong></ModalHeader>
           <ModalBody>
-          <div className="fileModalBox">
-          <form className="formBox">
-            <input placeholder="Enter a name" className="form-control fileInput" name="fileName" type="text" value={this.state.fileName} onChange={this.handleInputChange} />
-            <button type="submit" className="btn btn-success createFileSub" onClick={this.handleFormSubmit}>Create File</button>
-          </form>
+          <div className="deleteModalBox">
+            <p>All of the URL's inside of the file will be deleted. Would you like to continue?</p>
+            <form className="deleteBox">
+              {/* <button className="btn btn-success deleteFileNo"  onClick={this.toggle}>No, Keep</button> */}
+              <Button className="btn-success deleteFileNo"  onClick={this.toggle}>No Keep</Button>
+             {/* ---------------------------------------- No page reload button below...work in progress ------------------------------------ */}
+              {/* <Button className="btn-danger deleteFileYes" onClick={() => this.props.removeFile(this.props.fileId)} >Yes, Delete</Button> */}
+              <button type="submit" className="btn btn-danger deleteFileYes" onClick={() => this.props.removeFile(this.props.fileId)} >Yes, Delete</button>
+            </form>
           </div>
           </ModalBody>
           <ModalFooter className="modalFooter">
-          <Button className="fileModalBtn"  onClick={this.toggle}>Back</Button>
+          <Button className="deleteModalBtn"  onClick={this.toggle}>Back</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -88,4 +92,4 @@ class FileModal extends React.Component {
   }
 }
 
-export default FileModal;
+export default DeleteModal;

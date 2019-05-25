@@ -1,0 +1,24 @@
+.deleteFileBtn {
+    color: red;
+    border: none;
+}
+
+.deleteFileBtn:hover {
+    color: red;
+}
+.deleteBox {
+    text-align: center;
+}
+.deleteFileNo {
+    margin-right: 20px;
+}
+
+.deleteFileYes {
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 414px) {
+
+    
+
+} 

@@ -34,6 +34,7 @@ module.exports = function(app) {
   });
   
   app.delete("/api/files/:id", function(req, res) {
+    console.log("hit")
     db.Files.destroy({
       where: {
         id: req.params.id

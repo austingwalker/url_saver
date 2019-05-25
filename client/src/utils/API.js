@@ -19,13 +19,14 @@ export default {
   },
 
   addFile: function(fileData) {
-    console.log(fileData)
     return axios.post("/api/files", fileData);
   },
 
   //Put functions
 
   //Delete functions
-
+  deleteFile: function(id) {
+    return axios.delete("/api/files/" + id);
+  },
 
 };

@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
 import "./Files.css"
 import FileModal from "../../Components/FileModal"
+import DeleteModal from "../../Components/DeleteModal"
 
 class Files extends Component {
   // Setting our component's initial state
@@ -15,7 +16,6 @@ class Files extends Component {
 
   componentDidMount(){
     this.renderAllFiles()
-    this.resetState()
   }
 
   renderAllFiles = () => {
@@ -47,12 +47,21 @@ class Files extends Component {
       })
         .then(res => {
           alert(`File ${this.capitalize(this.state.fileName)} was created.`)
-          this.resetState()
+          // this.resetState()
           this.renderAllFiles()
            
         })
         .catch(err => console.log(err));
     }
+  };
+
+  deleteFile = id => {
+    console.log(id)
+    API.deleteFile(id)
+      .then(res => {
+        this.renderAllFiles()
+      })
+      .catch(err => console.log(err));
   };
 
   resetState = () => {
@@ -64,26 +73,17 @@ class Files extends Component {
   render() {
     return (
         <Container>
-          {/* <Row className="filesFormRow">
-            <Col md="2">
-            </Col>
-            <Col>
-              <form>
-                <input placeholder="Enter a name" className="form-control addFileInput" name="fileName" type="text" value={this.state.fileName} onChange={this.handleInputChange} />
-                <button type="submit" className="btn btn-success addFileBtn" onClick={this.handleFormSubmit}>Create File</button>
-              </form>
-            </Col>
-            <Col md="2">
-            </Col>
-          </Row> */}
           <Row>
             <Col md="2">
             </Col>
             <Col >
               <div className="files-container">
-                <h1 className="tableHeader">Files</h1>
+                <h1 className="tableHeader">URL Files</h1>
                 <div className="addNewFileBtn">
-                <FileModal />
+                <FileModal
+                resetFiles={this.renderAllFiles}
+                num={2}
+                />
                 </div>
                 <table className="table table-striped">
                   <thead>
@@ -101,19 +101,23 @@ class Files extends Component {
                      <Link className="btn btn-link fileName" to={"/ViewFile/" + file.id}>{file.name}</Link>
                      </td>
                      <td className="numOfUrls">
-                      {file.Urls.length}
+                      <div className="number">{file.Urls.length}</div>
                      </td>
                      <td>
                      <Link className="btn btn-link viewFileLink" to={"/ViewFile/" + file.id}>View File</Link>
                      </td>
                      <td className="deleteBtn">
-                       Delete
+                     <DeleteModal
+                     removeFile={this.deleteFile}
+                     fileId={file.id}
+                     />
+                       {/* <button type="submit" className="btn deleteBtn"  onClick={() => this.deleteFile(file.id)}>Delete</button> */}
                      </td>
                     </tr>
                     ))}
                   </tbody>
                   </table>
-                      
+                  
               </div>
             </Col>
             <Col md="2">
