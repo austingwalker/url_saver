@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from 'reactstrap';
+// import { Container, Row, Col } from 'reactstrap';
 import "./Home.css"
 import Landing from "../../Components/Landing"
 import Content from "../../Components/Content"

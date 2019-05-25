@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
+import "./Files.css"
 
 class Files extends Component {
   // Setting our component's initial state
@@ -66,19 +68,15 @@ class Files extends Component {
 
   render() {
     return (
-        <div className="container">
-          <div className="row mt-4">
-            <div className="col-md-2 col-sm-2">
-            <Link className="btn btn-light" to="/">Home</Link>
-            </div>
-            <div className="col-md-2 col-sm-2">
-            <Link className="btn btn-light" to="/content">Add URL</Link>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-8 offset-md-2">
-              <div className="author-container">
-                <h1>Files</h1>
+        <Container>
+          <Row>
+            
+         
+            <Col md="2">
+            </Col>
+            <Col >
+              <div className="files-container">
+                <h1 className="tableHeader">Files</h1>
                 <table className="table table-striped">
                   <thead>
                     <tr>
@@ -93,32 +91,35 @@ class Files extends Component {
                   {this.state.files.map(file => (
                     <tr id="form-row">
                      <td>
-                       {file.name}
+                     <Link className="btn btn-link fileName" to={"/ViewFile/" + file.id}>{file.name}</Link>
                      </td>
-                     <td>
+                     <td className="numOfUrls">
                       {file.Urls.length}
                      </td>
                      <td>
-                     <Link className="btn btn-light" to={"/ViewFile/" + file.id}>View File</Link>
+                     <Link className="btn btn-link viewFileLink" to={"/ViewFile/" + file.id}>View File</Link>
                      </td>
-                     <td>
+                     <td className="addBtn">
                        Add
                      </td>
-                     <td>
+                     <td className="deleteBtn">
                        Delete
                      </td>
                     </tr>
                     ))}
                   </tbody>
                   </table>
-                      <form id="author-form">
+                      <form>
                         <input placeholder="Enter a name" className="form-control" name="fileName" type="text" value={this.state.fileName} onChange={this.handleInputChange} />
                         <button type="submit" className="btn btn-success" onClick={this.handleFormSubmit}>Create File</button>
                       </form>
               </div>
-            </div>
-          </div>
-		    </div>
+            </Col>
+            <Col md="2">
+            </Col>
+          
+          </Row>
+		    </Container>
     );
   }
 }

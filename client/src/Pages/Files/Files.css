@@ -1,0 +1,31 @@
+.tableHeader {
+    float: left
+}
+
+.tableHeaderUrl {
+    float: right
+}
+
+.files-container {
+    margin-top: 100px;
+    padding: 30px;
+    background: white;
+}
+
+.viewFileLink {
+    color: black;
+    cursor: pointer; 
+}
+
+
+.fileName{
+    cursor: pointer; 
+}
+
+.addBtn {
+    cursor: pointer;
+}
+
+.deleteBtn {
+    cursor: pointer;
+}
