@@ -1,0 +1,59 @@
+.createFileBtn {
+    padding: 0px;
+    margin-bottom: 4px;
+    margin-left: 2px;
+    color: #18BC9C;
+    float: left;
+    border: none;
+    
+}
+
+.createFileBtn:hover {
+    color: #18BC9C;
+    
+}
+
+.fileModalBox {
+    margin-top: 20px;
+}
+
+
+.fileModalHeader {
+    color: white;
+    background: #18BC9C;
+    border-radius: 0px;
+    
+}
+
+.fileModalBtn {
+    color: white;
+    background: #18BC9C;
+    float: left;
+    margin-right: 75%;
+}
+
+.modalFooter {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.fileInput {
+    float: left;
+    width: 75%;
+}
+
+.createFileSub {
+    float: right;
+}
+
+@media screen and (max-width: 414px) {
+
+    .fileInput {
+        width: 70%;
+    }
+
+    .fileModalBtn {
+        margin-right: 68%;
+    }
+
+}

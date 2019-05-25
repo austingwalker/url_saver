@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
 import "./Files.css"
+import FileModal from "../../Components/FileModal"
 
 class Files extends Component {
   // Setting our component's initial state
@@ -22,14 +23,9 @@ class Files extends Component {
     .then(res => {
       
       this.setState({ files: res.data})
-      // this.consoleLogs()
     })
     .catch(err => console.log(err));   
   }
-
-  // consoleLogs = () => {
-  //   console.log(this.state.files)
-  // }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -65,25 +61,36 @@ class Files extends Component {
     });
   }
   
-
   render() {
     return (
         <Container>
+          {/* <Row className="filesFormRow">
+            <Col md="2">
+            </Col>
+            <Col>
+              <form>
+                <input placeholder="Enter a name" className="form-control addFileInput" name="fileName" type="text" value={this.state.fileName} onChange={this.handleInputChange} />
+                <button type="submit" className="btn btn-success addFileBtn" onClick={this.handleFormSubmit}>Create File</button>
+              </form>
+            </Col>
+            <Col md="2">
+            </Col>
+          </Row> */}
           <Row>
-            
-         
             <Col md="2">
             </Col>
             <Col >
               <div className="files-container">
                 <h1 className="tableHeader">Files</h1>
+                <div className="addNewFileBtn">
+                <FileModal />
+                </div>
                 <table className="table table-striped">
                   <thead>
                     <tr>
                       <th>File</th>
                       <th># of URL's</th>
                       <th>See File's URL's</th>
-                      <th>Add URL</th>
                       <th>Delete File</th>
                     </tr>
                   </thead>
@@ -99,9 +106,6 @@ class Files extends Component {
                      <td>
                      <Link className="btn btn-link viewFileLink" to={"/ViewFile/" + file.id}>View File</Link>
                      </td>
-                     <td className="addBtn">
-                       Add
-                     </td>
                      <td className="deleteBtn">
                        Delete
                      </td>
@@ -109,10 +113,7 @@ class Files extends Component {
                     ))}
                   </tbody>
                   </table>
-                      <form>
-                        <input placeholder="Enter a name" className="form-control" name="fileName" type="text" value={this.state.fileName} onChange={this.handleInputChange} />
-                        <button type="submit" className="btn btn-success" onClick={this.handleFormSubmit}>Create File</button>
-                      </form>
+                      
               </div>
             </Col>
             <Col md="2">

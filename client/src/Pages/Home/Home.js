@@ -20,11 +20,8 @@ class Home extends Component {
   }
 
   handleBtnClick = event => {
-    console.log(event.target.parentNode)
     this.resetState()
     const { name, value } = event.target;
-    console.log(name)
-    console.log(value)
     this.setState({
           [name]: value,
           btnClicked: true

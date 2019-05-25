@@ -1,3 +1,21 @@
+.filesFormRow {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.addNewFileBtn {
+    float: right;
+}
+
+/* .addFileInput {
+    width: 85%;
+    float: left;
+}
+
+.addFileBtn {
+    float: right;
+} */
+
 .tableHeader {
     float: left
 }
@@ -7,7 +25,7 @@
 }
 
 .files-container {
-    margin-top: 100px;
+    margin-top: 20px;
     padding: 30px;
     background: white;
 }

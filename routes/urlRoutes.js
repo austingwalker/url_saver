@@ -49,7 +49,13 @@ module.exports = function(app) {
     console.log("URL req.body" + JSON.stringify(req.body, null, 2))
     db.Url.create(req.body).then(function(dbUrl) {
       res.json(dbUrl);
-    });
+    }).catch(function(err){
+      res.send(err)
+      console.log("Error -----------------")
+      console.log(err)
+      console.log(err.message)
+      console.log("Error -----------------")
+    })
   });
 
   // DELETE route for deleting posts

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'reactstrap';
 import API from "../../utils/API";
 import "./Url.css"
+import FileModal from "../FileModal"
 
 class Url extends Component {
   // Setting our component's initial state
@@ -16,12 +17,7 @@ class Url extends Component {
   componentDidMount(){
     this.renderAllFiles()
     this.resetState()
-    this.consoleLog()
   } 
-
-  consoleLog = () => {
-    console.log(this.props.contentType)
-  }
 
   renderAllFiles = () => {
     API.getFiles()
@@ -53,46 +49,34 @@ class Url extends Component {
     console.log("URL: " + this.state.url)
     console.log("File: " + id)
 
-    if (this.state.title.length >= 1){
-      if (this.state.url){
-        if (this.state.fileId){
-          API.addURL({
-            title: this.capitalize(this.state.title),
-            url: this.state.url,
-            FileId: id,
-          })
-            .then(res => {
-              
-              alert(`URL ${this.state.url} was added to your database!`)
+      API.addURL({
+        title: this.capitalize(this.state.title).trim(),
+        url: this.state.url,
+        FileId: id,
+      })
+        .then(res => {
+          console.log("Post res:" + JSON.stringify(res.data, null, 2))
+          if(res.data.createdAt){
+            alert(`URL ${this.state.url} was added to your database!`)
+          }
+          else if(res.data.name === "SequelizeForeignKeyConstraintError"){
+            // res.data.errors[0].instance.title.length > 20
+            alert("Please select a folder")
+          }
+          else if(res.data.errors[0].message === "Validation isUrl on url failed"){
+            alert("Please enter a valid URL")
+          } else if (res.data.errors[0].message === "Validation notEmpty on title failed"){
+            alert("Must enter a title")
+          }
+            else if(res.data.errors[0].message === "Validation len on title failed"){
+              // res.data.errors[0].instance.title.length > 20
+              alert("Title must be less than 20 characters...")
+          } 
             
-              this.resetState()
-               
-            })
-            .catch(err => console.log(err));
-        } else {
-          alert("Please select a valid folder")
-        }
-      } else {
-        alert("Please add a valid URL")
-      }
-    } else {
-      alert("Please add a title!")
-    }
-    
-    // if (this.state.title && this.state.url && this.state.fileId) {
-    //   API.addURL({
-    //     title: this.capitalize(this.state.title),
-    //     url: this.state.url,
-    //     FileId: id,
-    //   })
-    //     .then(res => {
-          
-    //       alert(`URL ${this.state.url} was added to your database!`)
-        
-    //       this.resetState()
+          this.resetState()
            
-    //     })
-    //     .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     
     // }
   };
@@ -101,7 +85,8 @@ class Url extends Component {
     this.setState({
       title: "",
       url: "",
-      fileName: ""
+      fileName: "",
+      fileId: ""
     });
   }
   
@@ -122,7 +107,12 @@ class Url extends Component {
                   <label>URL:</label>
                   <input placeholder="URL" type="url" pattern="https://.*" required className="form-control" rows="1" name="url" value={this.state.url} onChange={this.handleInputChange} />
                   <div className="form-group">
-                    <label>Select File:</label>
+                  <br />
+                    <label className="selectFile">Select file or  </label>
+                    <FileModal
+                    renderAllFiles={this.renderAllFiles}
+                    />
+                    {/* <button type="submit" className="btn btn-link createFileBtn">Create File</button> */}
                     <select className="custom-select" name="fileId" value={this.state.fileId} onChange={this.handleInputChange}>
                     <option>...</option>
                     {this.state.files.map(file => (
