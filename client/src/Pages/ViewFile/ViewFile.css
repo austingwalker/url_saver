@@ -2,4 +2,25 @@
     margin-top: 20px;
     padding: 30px;
     background: white;
+    width: 100%;
+}
+
+a {
+    word-break:break-all    
+}
+
+@media screen and (max-width: 414px) {
+
+    .fileContainter {
+        padding: 0px;
+        
+    }
+
+    .fileCol {
+        padding: 0px;
+    }
+   
+    .fileName {
+        padding-left: 2.5px;
+    }
 }

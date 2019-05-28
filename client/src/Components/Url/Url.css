@@ -44,9 +44,17 @@
 
 @media screen and (max-width: 414px) {
 
+    .allFilesArrow{
+        margin-right: .5%;
+        
+    }
+
     .addUrlBox {
         padding: 20px;
         margin: 20px;
+        margin-top: 0px;
      }
+
+   
 
 }

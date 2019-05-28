@@ -9,7 +9,7 @@ class ViewFile extends Component {
   // Setting our component's initial state
   state = {
    file: [],
-   fileName: ""
+   fileName: "",
   };
 
   componentDidMount() {
@@ -21,13 +21,29 @@ class ViewFile extends Component {
           file: res.data,
           fileName: res.data[0].File.name 
         })
-        this.consolelogs()
+        // this.consolelogs()
       })
       .catch(err => console.log(err));
   }
 
-  consolelogs = () => {
-    console.log(this.state.file[0].File.name)
+  checkHttp = (url) => {
+
+   let urlArr = url.split("")
+   
+    console.log(urlArr)
+    let newUrl = urlArr.slice(0, 4).map(i => {
+     return i
+    
+    })
+    const http = newUrl.join("")
+
+    if(http === "http"){
+      return  url
+      console.log("http blank hit")
+    } else{
+       return `//${url}`
+      console.log("http added hit")
+    }
   }
 
  
@@ -49,9 +65,9 @@ class ViewFile extends Component {
           <Row >
           <Col md="2">
           </Col>
-          <Col>
+          <Col className="fileCol">
            <div className="fileContainter">
-                <h1>{this.state.fileName}</h1>
+                <h1 className="fileName">{this.state.fileName}</h1>
                 <table className="table table-striped">
                   
                   <tbody>
@@ -61,7 +77,8 @@ class ViewFile extends Component {
                        <strong>{f.title}</strong>
                      </td>
                      <td>
-                     <a href={f.url}>{f.url}</a>
+                     
+                     <a href={this.checkHttp(f.url)} target="_blank">{f.url}</a>
                      </td>
                      <td>
                      {f.createdAt}
