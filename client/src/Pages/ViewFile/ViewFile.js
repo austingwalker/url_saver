@@ -6,7 +6,6 @@ import "./ViewFile.css"
 
 
 class ViewFile extends Component {
-  // Setting our component's initial state
   state = {
    file: [],
    fileName: "",
@@ -15,13 +14,10 @@ class ViewFile extends Component {
   componentDidMount() {
     API.getFile(this.props.match.params.id)
       .then(res => { 
-
-        // console.log("response data:" + JSON.stringify(res.data, null, 2))
         this.setState({ 
           file: res.data,
           fileName: res.data[0].File.name 
         })
-        // this.consolelogs()
       })
       .catch(err => console.log(err));
   }
@@ -30,19 +26,16 @@ class ViewFile extends Component {
 
    let urlArr = url.split("")
    
-    console.log(urlArr)
-    let newUrl = urlArr.slice(0, 4).map(i => {
+   let newUrl = urlArr.slice(0, 4).map(i => {
      return i
     
     })
-    const http = newUrl.join("")
+   const http = newUrl.join("")
 
     if(http === "http"){
       return  url
-      console.log("http blank hit")
     } else{
        return `//${url}`
-      console.log("http added hit")
     }
   }
 
@@ -69,15 +62,13 @@ class ViewFile extends Component {
            <div className="fileContainter">
                 <h1 className="fileName">{this.state.fileName}</h1>
                 <table className="table table-striped">
-                  
                   <tbody>
                   {this.state.file.map(f => (
-                    <tr id="form-row">
+                    <tr id="form-row" key={f.title}>
                      <td>
                        <strong>{f.title}</strong>
                      </td>
                      <td>
-                     
                      <a href={this.checkHttp(f.url)} target="_blank">{f.url}</a>
                      </td>
                      <td>

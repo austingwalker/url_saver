@@ -21,7 +21,6 @@ class Files extends Component {
   renderAllFiles = () => {
     API.getFiles()
     .then(res => {
-      
       this.setState({ files: res.data})
     })
     .catch(err => console.log(err));   
@@ -47,7 +46,6 @@ class Files extends Component {
       })
         .then(res => {
           alert(`File ${this.capitalize(this.state.fileName)} was created.`)
-          // this.resetState()
           this.renderAllFiles()
            
         })
@@ -106,7 +104,7 @@ class Files extends Component {
                   </thead>
                   <tbody>
                   {this.state.files.map(file => (
-                    <tr id="form-row">
+                    <tr id="form-row" key={file.id}>
                      <td>
                      <Link className="btn btn-link fileName" to={"/viewfile/" + file.id}>{file.name}</Link>
                      </td>
@@ -121,7 +119,6 @@ class Files extends Component {
                      removeFile={this.deleteFile}
                      fileId={file.id}
                      />
-                       {/* <button type="submit" className="btn deleteBtn"  onClick={() => this.deleteFile(file.id)}>Delete</button> */}
                      </td>
                     </tr>
                     ))}
@@ -132,7 +129,6 @@ class Files extends Component {
             </Col>
             <Col md="2">
             </Col>
-          
           </Row>
 		    </Container>
     );

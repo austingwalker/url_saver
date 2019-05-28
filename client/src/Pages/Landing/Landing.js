@@ -21,7 +21,7 @@ class Landing extends Component {
           <Col md="2">
           </Col>
           <Col className="landingArrowCol">
-            <Link className="btn allFilesArrowLanding" to="/files"><i class="fas fa-arrow-right righArrow"></i><h5 className="righArrowWords">View All URL Files</h5></Link>
+            <Link className="btn allFilesArrowLanding" to="/files"><i className="fas fa-arrow-right righArrow"></i><h5 className="righArrowWords">View All URL Files</h5></Link>
             {/* <button className="allFilesArrowLanding" onClick={this.props.contentSubmitted}>View All URL Files <i class="fas fa-arrow-right"></i></button> */}
           </Col>
           <Col md="2">

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./FileModal.css";
-import { Button, Modal, ModalHeader, ModalBody, Row,ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import API from "../../utils/API";
 
 class FileModal extends React.Component {

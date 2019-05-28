@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import API from "../../utils/API";
 import "./Url.css"
 import FileModal from "../../Components/FileModal"
 
 class Url extends Component {
-  // Setting our component's initial state
   state = {
     title: "",
     url: "",
@@ -22,7 +21,6 @@ class Url extends Component {
   renderAllFiles = () => {
     API.getFiles()
     .then(res => {
-      console.log(res.data)
       this.setState({ files: res.data})
     })
     .catch(err => console.log(err));   
@@ -44,23 +42,16 @@ class Url extends Component {
     event.preventDefault();
    
     let id = Number(this.state.fileId)
-
-    console.log("Title: " + this.state.title)
-    console.log("URL: " + this.state.url)
-    console.log("File: " + id)
-
       API.addURL({
         title: this.capitalize(this.state.title).trim(),
         url: this.state.url,
         FileId: id,
       })
         .then(res => {
-          console.log("Post res:" + JSON.stringify(res.data, null, 2))
           if(res.data.createdAt){
             alert(`URL ${this.state.url} was added to your database!`)
           }
           else if(res.data.name === "SequelizeForeignKeyConstraintError"){
-            // res.data.errors[0].instance.title.length > 20
             alert(`A folder must be selected. 
 Please create one if none exist.`)
           }
@@ -70,17 +61,11 @@ Please create one if none exist.`)
             alert("Must enter a title")
           }
             else if(res.data.errors[0].message === "Validation len on title failed"){
-              // res.data.errors[0].instance.title.length > 20
               alert("Title must be less than 20 characters...")
           } 
-            
           this.resetState()
-          this.props.contentSubmitted() 
-           
         })
         .catch(err => console.log(err));
-    
-    // }
   };
 
   resetState = () => {
@@ -100,8 +85,7 @@ Please create one if none exist.`)
         <Col md="2">
         </Col>
         <Col>
-        <Link className="btn allFilesArrow" to="/files"><i class="fas fa-arrow-right righArrow"></i><h5 className="righArrowWords">View All URL Files</h5></Link>
-        {/* <button className="allFilesArrow" onClick={this.props.contentSubmitted}>View All URL Files <i class="fas fa-arrow-right"></i></button> */}
+        <Link className="btn allFilesArrow" to="/files"><i className="fas fa-arrow-right righArrow"></i><h5 className="righArrowWords">View All URL Files</h5></Link>
         </Col>
         <Col md="2">
         </Col>
@@ -125,7 +109,6 @@ Please create one if none exist.`)
                     renderAllFiles={this.renderAllFiles}
                     num={1}
                     />
-                    {/* <button type="submit" className="btn btn-link createFileBtn">Create File</button> */}
                     <select className="custom-select" name="fileId" value={this.state.fileId} onChange={this.handleInputChange}>
                     <option>...</option>
                     {this.state.files.map(file => (
@@ -139,7 +122,6 @@ Please create one if none exist.`)
               </form>
             </div>
             </Col>
-            
             <Col md="2">
             </Col>
           </Row>
