@@ -108,7 +108,7 @@ class Files extends Component {
                   {this.state.files.map(file => (
                     <tr id="form-row">
                      <td>
-                     <Link className="btn btn-link fileName" to={"/ViewFile/" + file.id}>{file.name}</Link>
+                     <Link className="btn btn-link fileName" to={"/viewfile/" + file.id}>{file.name}</Link>
                      </td>
                      <td className="numOfUrls">
                       <div className="number">{file.Urls.length}</div>
