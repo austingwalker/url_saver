@@ -25,7 +25,7 @@ app.get("*", function(req, res) {
 });
 
 //Sync and listen
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
   });
